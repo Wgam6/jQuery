@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration and Login Form</title>
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="registrationForm">
+        <h2>Register</h2>
+        <form action="/submit_registration" method="post" onsubmit="return validateRegistration()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+            
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <div id="loginForm" class="hidden">
+        <h2>Login</h2>
+        <form action="/submit_login" method="post" onsubmit="return validateLogin()">
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" name="loginUsername" required><br><br>
+            
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" required><br><br>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <button onclick="toggleForms()">Switch to Login</button>
+    <button onclick="toggleForms(true)">Switch to Register</button>
+
+    <script>
+        function toggleForms(showRegistration = false) {
+            const registrationForm = document.getElementById('registrationForm');
+            const loginForm = document.getElementById('loginForm');
+            if (showRegistration) {
+                registrationForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            } else {
+                registrationForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+            }
+        }
+
+        function validateRegistration() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateLogin() {
+            // Add any specific validation logic here if needed
+            return true;
+        }
+    </script>
+</body>
+</html>
