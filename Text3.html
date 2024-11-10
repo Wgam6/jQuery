@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF - 8">
+    <title>Login Page</title>
+</head>
+<body>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+    <script src="https://code.jquery.com/jquery - 3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                var username = $('#username').val();
+                var password = $('#password').val();
+                $.ajax({
+                    type: "POST",
+                    url: "login.php",
+                    data: { username: username, password: password },
+                    success: function(data) {
+                        if (data === "success") {
+                            window.location.href = "blogManagement.php";
+                        } else {
+                            alert("Login failed");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<?php
+// 假设这里有数据库连接代码
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// 假设这里有验证用户名和密码的函数
+if (validateUser($username, $password)) {
+    echo "success";
+} else {
+    echo "Login failed";
+}
+
+function validateUser($username, $password) {
+    // 这里应该是数据库查询操作来验证用户
+    // 例如：
+    // $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    // $result = mysqli_query($conn, $query);
+    // return mysqli_num_rows($result) > 0;
+    return false;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF - 8">
+    <title>Blog Management System</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>userid</th>
+            <th>body</th>
+            <th>title</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>quia et suscipit suscipit recusandae consequuntur expedita et cum
+                reprehenderit molestiae ut ut quas totam
+                nostrum rerum est autem sunt rem eveniet architecto.</td>
+            <td>sunt facere repellat provident occaecati excepturi optio reprehenderit</td>
+        </tr>
+       
+
+    </table>
+</body>
+</html>
