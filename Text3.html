@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Management System</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid black;
+            border-top: 5px;
+            border-left: 5px;
+            border-right: 5px;
+            border-bottom: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+            border-bottom: 1px solid black;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            border-bottom: 1px solid black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+       .d {
+            width: 100%;
+            height: 100px;
+            background-color: #007BFF;
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="d">Blog Management System</h2>
+    <table id="postsTable">
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Actions</th>
+        </tr>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'GET',
+                success: function (response) {
+                    console.log('Response:', response);
+                    let list = response;
+                    list.forEach(item => {
+                        console.log(item);
+                        $("#postsTable").append(
+                            "<tr>" +
+                            "<td>" + item.id + "</td>" +
+                            "<td>" + item.userId + "</td>" +
+                            "<td>" + item.title + "</td>" +
+                            "<td>" + item.body + "</td>" +
+                            "<td><button class='editBtn'>Edit</button><button class='deleteBtn'>Delete</button></td>" +
+                            "</tr>"
+                        );
+                    });
+
+                    // Add event listeners for edit and delete buttons
+                    $(".editBtn").on("click", function () {
+                        // Implement edit functionality here
+                        alert("Edit button clicked.");
+                    });
+
+                    $(".deleteBtn").on("click", function () {
+                        // Implement delete functionality here
+                        alert("Delete button clicked.");
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("An error occurred: " + error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
