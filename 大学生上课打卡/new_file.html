@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>大学生上课打卡表</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+      .text-success {
+            color: green;
+        }
+      .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>大学生上课打卡表</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>课程名称</th>
+                    <th>打卡状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>周一</td>
+                    <td>高等数学</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input" id="check1">
+                        <i class="bi bi-check-circle-fill text-success" id="icon1"></i>
+                        <i class="bi bi-x-circle-fill text-danger" id="icon2"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewDetails(1)">查看详情</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelCheck(1)">取消打卡</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>周二</td>
+                    <td>大学英语</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input" id="check2">
+                        <i class="bi bi-check-circle-fill text-success" id="icon3"></i>
+                        <i class="bi bi-x-circle-fill text-danger" id="icon4"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewDetails(2)">查看详情</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelCheck(2)">取消打卡</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>周三</td>
+                    <td>计算机基础</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input" id="check3">
+                        <i class="bi bi-check-circle-fill text-success" id="icon5"></i>
+                        <i class="bi bi-x-circle-fill text-danger" id="icon6"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewDetails(3)">查看详情</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelCheck(3)">取消打卡</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>周四</td>
+                    <td>物理实验</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input" id="check4">
+                        <i class="bi bi-check-circle-fill text-success" id="icon7"></i>
+                        <i class="bi bi-x-circle-fill text-danger" id="icon8"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewDetails(4)">查看详情</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelCheck(4)">取消打卡</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>周五</td>
+                    <td>思想政治</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input" id="check5">
+                        <i class="bi bi-check-circle-fill text-success" id="icon9"></i>
+                        <i class="bi bi-x-circle-fill text-danger" id="icon10"></i>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="viewDetails(5)">查看详情</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelCheck(5)">取消打卡</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const successIcon = this.nextElementSibling;
+                    const dangerIcon = successIcon.nextElementSibling;
+                    if (this.checked) {
+                        successIcon.style.display = 'inline';
+                        dangerIcon.style.display = 'none';
+                    } else {
+                        successIcon.style.display = 'none';
+                        dangerIcon.style.display = 'inline';
+                    }
+                });
+            });
+        });
+
+        function viewDetails(courseId) {
+            alert(`查看课程 ${courseId} 的打卡详情`);
+            // 这里可以添加具体的逻辑，例如向服务器请求该课程的打卡详细信息，然后展示在模态框中
+        }
+
+        function cancelCheck(courseId) {
+            const checkbox = document.getElementById(`check${courseId}`);
+            const successIcon = document.getElementById(`icon${courseId * 2 - 1}`);
+            const dangerIcon = document.getElementById(`icon${courseId * 2}`);
+            checkbox.checked = false;
+            successIcon.style.display = 'none';
+            dangerIcon.style.display = 'inline';
+            alert(`已取消课程 ${courseId} 的打卡`);
+            // 这里可以添加具体的逻辑，例如将取消打卡的信息发送到服务器
+        }
+    </script>
+</body>
+</html>
